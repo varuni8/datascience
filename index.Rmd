@@ -1,7 +1,9 @@
---
-title: "Sidebar"
-output: flexdashboard::flex_dashboard
-runtime: shiny
+---
+title: "Row Orientation"
+output: 
+  flexdashboard::flex_dashboard:
+    orientation: rows
+    runtime: shiny
 ---
 
 Inputs {.sidebar}
@@ -10,16 +12,27 @@ Inputs {.sidebar}
 ```{r}
 # shiny inputs defined here
 ```
- 
-Column
+    
+Row
 -------------------------------------
     
 ### Chart 1
     
 ```{r}
+
 ```
+   
+Row
+-------------------------------------
     
 ### Chart 2
+    
+```{r}
+
+```
+    
+### Chart 3
 
 ```{r}
+
 ```
