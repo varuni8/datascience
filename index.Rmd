@@ -1,46 +1,25 @@
----
-title: "Untitled"
-output: 
-  flexdashboard::flex_dashboard:
-    orientation: columns
-    vertical_layout: fill
+--
+title: "Sidebar"
+output: flexdashboard::flex_dashboard
+runtime: shiny
 ---
 
-```{r setup, include=FALSE}
-library(flexdashboard)
-```
 Inputs {.sidebar}
------------------------------------------------------------------------
+-------------------------------------
 
 ```{r}
- selectInput("clusterNum", label = h3("Cluster number"), 
-    choices = list("1" = 1, "2" = 2, "3" = 3, "4" = 4, "5" = 5), 
-    selected = 1)
+# shiny inputs defined here
 ```
-
-xxx
-
-Column {data-width=650}
------------------------------------------------------------------------
-
-### Chart A
+ 
+Column
+-------------------------------------
+    
+### Chart 1
+    
+```{r}
+```
+    
+### Chart 2
 
 ```{r}
-
 ```
-
-Column {data-width=350}
------------------------------------------------------------------------
-
-### Chart B
-
-```{r}
-
-```
-
-### Chart C
-
-```{r}
-
-```
-
