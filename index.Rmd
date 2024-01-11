@@ -12,15 +12,17 @@ Inputs {.sidebar}
 ```{r}
 # shiny inputs defined here
 ```
+A short description and overview of the dashboard.
     
 Row
 -------------------------------------
     
-### Chart 1
+### Data Representation
     
 ```{r}
 
 ```
+A graphical representation of the data from the survey using boxplots.
    
 Row
 -------------------------------------
@@ -30,9 +32,12 @@ Row
 ```{r}
 
 ```
+A graphical representation of how the number of correct answers were influenced by the people's english levels.
     
 ### Chart 3
 
 ```{r}
 
 ```
+A graphical representation of how they thought music effected their responses vs actual accuracy.
+
