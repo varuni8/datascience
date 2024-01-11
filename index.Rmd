@@ -1,5 +1,5 @@
 ---
-title: "Row Orientation"
+title: "Cognitive Impact of Music"
 output: 
   flexdashboard::flex_dashboard:
     orientation: rows
