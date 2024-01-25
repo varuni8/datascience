@@ -2,11 +2,12 @@
 title: "Cognitive Impact of Music"
 output:
   flexdashboard::flex_dashboard:
+    menu: [ "menu" ]
     theme: 
       version: 4
       bootswatch: lux
-    orientation: rows
-    storyboard: true
+      orientation: rows
+      storyboard: true
 ---
 
 ```{r setup, include=FALSE}
@@ -18,7 +19,7 @@ library(ggstatsplot)
 
 ```
 
-Background {data-orientation=rows}
+Introduction {data-orientation=rows}
 =======================================================================
 Value Boxes {data-width=150}
 -------------------------------------
@@ -26,41 +27,41 @@ Value Boxes {data-width=150}
 ### Participants
 
 ```{r}
-valueBox(11, caption = "Participants")
-```
-
-### Audiophiles
-
-```{r}
-valueBox(5, caption = "Audiophiles", color = "info")
-```
-
-### Non
-```{r}
-valueBox(6, caption = "Casual listeners", color = "success")
-```
-
-### Effected
-
-```{r}
-valueBox(3, caption = "Effected by change", color = "warning")
+valueBox(50, caption = "Participants", icon = "ion-compose")
 ```
 
 ### Didnt care
 
 ```{r}
-valueBox(8, caption = "Unaffected", color = "danger")
+valueBox(35, caption = "Usable responses", color = "danger", icon = "ion-android-checkmark-circle")
+```
+
+### Audiophiles
+
+```{r}
+valueBox(22, caption = "Audiophiles", color = "info", icon = "ion-headphone")
+```
+
+### Non
+```{r}
+valueBox(13, caption = "Casual listeners", color = "success", icon = "ion-happy-outline")
+```
+
+### Effected
+
+```{r}
+valueBox(32, caption = "Effected by change", color = "warning", icon = "ion-android-sad")
 ```
 
 Column
 -----------------------------------------------------------------------
 
-###  Introduction {data-width=650, font=bold}
+###  The Study {data-width=650, font=bold}
 ```{r}
 ```
 The objective of this study was to explore the impact of music on participants' comprehension and retention of passages during reading. Two distinct passages, varying in difficulty levels, were presented to participants under two conditions: one with accompanying music and the other in silence. Post-reading, participants were promptly assessed through a set of questions related to the passages.
 
-Our participant pool was intentionally diverse, encompassing individuals with varied study backgrounds and age groups. This inclusivity aimed to capture insights from those who both regularly and infrequently listen to music while reading or studying. The study sought to discern whether participants, who typically refrain from incorporating music into their study routine, encounter difficulties in focus, or conversely, whether music enhances their cognitive processes during reading. This multifaceted approach allows us to explore the potential benefits or challenges associated with integrating music into the reading environment across different demographic groups.
+We tried to have a diverse participant pool, encompassing individuals with varied study backgrounds and age groups. This inclusivity aimed to capture insights from those who both regularly and infrequently listen to music while reading or studying. The study sought to discern whether participants, who typically refrain from incorporating music into their study routine, encounter difficulties in focus, or conversely, whether music enhances their cognitive processes during reading. This multifaceted approach allows us to explore the potential benefits or challenges associated with integrating music into the reading environment across different demographic groups.
 
 
 ### Our Hypothesis
@@ -84,12 +85,61 @@ knitr::kable(tabledata)
 
 
 ### Data cleaning
-In order to get the best results, we had to clean out some of the responses filled in the survey. We started by clearing out any names which were not "anonymous" in order to maintain privacy. Furthermore, only responses filled in after 2024-01-15 were used in order to exclude our test responses from the results. Survey durations outside the range of 360 to 1800 seconds were filtered out. Columns containing time-related data were converted to numeric format with non-numeric entries replaced by NaN, and two new data frames are created by filtering the original data frame based on specific consitions. The purpose of this is to separate the data into two groups based on values of time taken to answer a question with music.
+In order to get the best results, we had to clean out some of the responses filled in the survey. We started by clearing out any names which were not "anonymous", and also cleared out responses filled in before 2024-01-15 in order to exclude our test responses from the results. Survey durations outside the range of 360 to 1800 seconds were filtered out. Columns containing time-related data were converted to numeric format with non-numeric entries replaced by NaN, and two new data frames are created by filtering the original data frame based on specific conditions. The purpose of this is to separate the data into two groups based on values of time taken to answer a question with music.
 
 
+Experiment Design
+=======================================================================
+Row
+-------------------------------------
+
+### The survey
+```{r}
+
+```
+The survey begins by collecting fundamental user information, including their age group and employment status. Subsequently, participants encounter the first passage, with the presence or absence of background music randomly assigned. After reading the initial passage under the specified condition, respondents are prompted to answer questions related to that passage.
+
+Following this, participants proceed to the second passage, experiencing the opposite music condition from the first. For instance, if music accompanied the reading of the first passage, the second passage is read without music, and vice versa. Again, participants respond to questions pertaining to the second passage.
+
+In addition to passage-specific questions, the survey delves into participants' backgrounds, incorporating questions (stated below) designed to provide insights into potential influencing factors on the survey results. Through these questions we aim to enhance our understanding of how individual characteristics might correlate with the participants' responses.
+
+1. What effect did the music have on your reading performance?
+  
+  a. music made it more difficult to read
+  b. there was no difference
+  c. the music made it easier to read
+  
+  
+2. Do you usually listen to music while reading or studying/working?"
+
+  a. Yes
+  b. No
+  
+  
+3. What is your level of proficiency in English?
+
+  a. Elementary proficiency
+  b. Limited working proficiency
+  c. Professional working proficiency
+  d. Full professional proficiency/Native
 
 
-Time with vs without music
+4. What region are you from?
+
+  a. Europe
+  b. Asia
+  c. North america
+  d. Other
+  
+Column
+-------------------------------------
+
+```{r}
+include_graphics("C:\\Users\\varun\\Downloads\\survey.png") 
+```
+
+
+Time with vs without music{data-navmenu="Research" data-orientation=columns} 
 =======================================================================
 
 Row {.tabset data-height=650}
@@ -152,7 +202,7 @@ In examining the impact of background music on reading times for passages of var
 Contrastingly, for the easier Amazon passage, the influence of music displayed a nuanced effect on participants' reading times. Interestingly, those reading with music completed the passage in notably less time on average, suggesting a potential positive impact on reading speed. Without music, the reading times exhibited surprising variability; while a substantial portion of participants swiftly completed the passage, there was also a noteworthy group that took unexpectedly longer. This diversity in response times implies that the absence of music led to varied reading speeds, with some individuals benefiting from a quicker pace, while others engaged in a more prolonged reading experience.
 
 
-Time vs Accuracy
+Time vs Accuracy{data-navmenu="Research" data-orientation=columns} 
 =======================================================================
 
 Row {.tabset data-height=650}
@@ -162,22 +212,26 @@ Row {.tabset data-height=650}
 ```{r}
 data1 <- read.csv('C:\\Users\\varun\\OneDrive\\Documents\\datascience\\DF1.xls')
 data2 <- read.csv('C:\\Users\\varun\\OneDrive\\Documents\\datascience\\DF2.xls')
-ggplot(data1, aes(AmazonMusicTime_Page.Submit, AMQScore, color= MusicEffectAmazon)) +
+ggplot(data1, aes(AmazonMusicTime_Page.Submit, AMQScore, color= MusicEffectAmazon, size=Proficiency)) +
   geom_point(alpha=0.4, position="jitter") +
   scale_color_manual(values=c('The music made it easier to read'='green',
                               'There was no difference'='blue',
-                              'The music made it more difficult to read'='red'))+
+                              'The music made it more difficult to read'='red')) +
+  scale_size_manual(values = c("Elementary proficiency"=1, "Limited working proficiency"=2,
+                               "Professional working proficiency" =4,"Full professional proficiency / Native"=6 )) + 
   labs(title = "Scatter Plot of Reading Time and Correct Answers")
 ```
 
 ### With Music2
 
 ```{r}
-ggplot(data2, aes(GlomarMusicTime_Page.Submit, GMQScore, color= MusicEffectGlomar)) +
+ggplot(data2, aes(GlomarMusicTime_Page.Submit, GMQScore, color= MusicEffectGlomar, size=Proficiency)) +
   geom_point(alpha=0.4, position="jitter") +
   scale_color_manual(values=c('The music made it easier to read'='green',
                               'There was no difference'='blue',
                               'The music made it more difficult to read'='red')) +
+  scale_size_manual(values = c("Elementary proficiency"=1, "Limited working proficiency"=2,
+                               "Professional working proficiency" =4,"Full professional proficiency / Native"=6 )) + 
   labs(title = "Scatter Plot of Reading Time and Correct Answers")
 ```
 
@@ -186,15 +240,19 @@ Row {.tabset data-height=650}
 
 ### Without Music1
 ```{r}
-ggplot(data2, aes(AmazonTime_Page.Submit, AQScore)) +
+ggplot(data2, aes(AmazonTime_Page.Submit, AQScore, size=Proficiency)) +
   geom_point(alpha=0.4, position="jitter")  +
+  scale_size_manual(values = c("Elementary proficiency"=1, "Limited working proficiency"=2,
+                               "Professional working proficiency" =4,"Full professional proficiency / Native"=6 )) + 
   labs(title = "Scatter Plot of Reading Time and Correct Answers")
 ```
 
 ### Without Music2
 ```{r}
-ggplot(data1, aes(GlomarTime_Page.Submit, GQScore)) +
+ggplot(data1, aes(GlomarTime_Page.Submit, GQScore, size=Proficiency)) +
   geom_point(alpha=0.4, position="jitter")  +
+  scale_size_manual(values = c("Elementary proficiency"=1, "Limited working proficiency"=2,
+                               "Professional working proficiency" =4,"Full professional proficiency / Native"=6 )) + 
   labs(title = "Scatter Plot of Reading Time and Correct Answers")
 ```
 
@@ -206,28 +264,84 @@ In analyzing the impact of background music on participants' performance across 
 
 Shifting focus to the easy passage, with music, individuals who perceived it as challenging still achieved high scores, likely due to the inherent simplicity of the passage. Similarly, those who perceived no difference in difficulty, even with music, also scored relatively higher. In the absence of music, reading times were shorter compared to the duration with music, and the average number of correct answers was higher, suggesting that the absence of background music positively influenced both reading speed and comprehension for the easy passage.
 
+Accuracy wrt Habit {data-navmenu="Research" data-orientation=columns} 
+=======================================================================
+
+Row {.tabset data-height=650}
+-------------------------------------
+```{r}
+
+ggplot(data1, aes(AmazonMusicTime_Page.Submit, AMQScore, color= Habit, size=Proficiency)) +
+  geom_point(alpha=0.4, position="jitter") +
+  scale_color_manual(values=c('Yes'='green', 'No'='red')) +
+  scale_size_manual(values = c("Elementary proficiency"=1, "Limited working proficiency"=2,
+                               "Professional working proficiency" =4,"Full professional proficiency / Native"=6 )) + 
+  labs(title = "Scatter Plot of Reading Time and Correct Answers")
+```
+
+```{r}
+
+ggplot(data2, aes(GlomarMusicTime_Page.Submit, GMQScore, color= Habit, size=Proficiency)) +
+  geom_point(alpha=0.4, position="jitter") +
+  scale_color_manual(values=c('Yes'='green', 'No'='red')) +
+  scale_size_manual(values = c("Elementary proficiency"=1, "Limited working proficiency"=2,
+                               "Professional working proficiency" =4,"Full professional proficiency / Native"=6 )) + 
+  labs(title = "Scatter Plot of Reading Time and Correct Answers")
+```
+
+Column {.sidebar data-width=300}
+-------------------------------------
 
 Conclusion
 =======================================================================
 
 Row
 -------------------------------------
-### Observation I
 
-### Box plot representing the time taken to read both passages with and without music {data-width=400}
+### Results
+As for what concerns the more intricate passage, the presence or absence of music constitutes a pertinent difference in the reading speed and accuracy in responses required to complete the task. In the absence of music, participants dealt with a lower level of complexity when skimming through the text, as demonstrated by higher numbers of correct answers and shorter time frames. We have easily distinguished between a majority of people who stated that music increased the effort necessary to complete the activity, and a minority who deemed music to have caused positive effect or no effect whatsoever on their reading experience. We expect this minority to be accustomed to background music listening in their habitual work environment, and will further investigate the matter as we collect additional data and finalize the research. This reflects our expected results, as it aligns with our hypothesis that external stimuli cause greater impact on more complex performances.
+
+By foregrounding the easier passage, we obtained more varied results: while we predicted people would spend less time reading when listening to music, we also encountered a meaningful variability for the participants who read it without music, some of whom took longer and some shorter times. Furthermore, subjects who responded negatively to the presence of music scored relatively high regardless, due to the simplicity of the text, although not as high as subjects who responded positively or indifferently. Hence, we can deduce that our hypothesis that music poses a threat to concentration in complex tasks rather than easier ones was fairly precise.
+
+Row
+-------------------------------------
+### Limitations
+Since we selected and controlled the music the participants listened to, we cannot infer that other pieces of music will have the same effect on the reading time and accuracy. However, the scope of this research is not to investigate which genre of music is more effective when performing a task involving high level of concentration, but rather whether the absence and presence of music significantly impacts the speed and accuracy of the reception of the information. Therefore, we have focused on more “catchy” and popular songs without delving too deep into a particular music category.
+
+Column
+-------------------------------------
+
+### Box plot representing the time taken to read both passages with and without music{data-width=300}
 
 ```{r}
 include_graphics("C:\\Users\\varun\\Downloads\\boxplots.png") 
 ```
 
-Row
--------------------------------------
-### Observation II
-
-
-### Scatterplots representing how the accuracy was affected by music {data-width=350}
-
+### Scatterplots representing how the accuracy was affected by music {data-height=800}
 ```{r}
 include_graphics("C:\\Users\\varun\\Downloads\\scatterplots.png")
 ```
 
+Background
+=======================================================================
+
+Column
+-------------------------------------
+### Literature Study
+
+Our experiment is partially inspired by Teresa Lesiuk’s study: The effect of music listening on work performance. In her experiment, she monitored 56 IT developers’ mood, work quality, time-on-task in a 5 weeks timeframe. The music choice was not limited, and the participants were assigned to conduct their regular tasks for work. By contrast, we controlled for the music our subjects listened to, since our aim was to have our subjects exposed to the same stimuli and it is not possible for Qualtrics to automatically play the type of music they are used to. On the other hand, the demographic for this experiment is more diverse, and the tasks we assign our subjects to do have a clear distinction in terms of complexity, allowing us to discover whether music plays a constant role when dealing with tasks requires different level of concentration. Additionally, as Lesiuk found in her result that not everyone responded positively to music in the beginning of the experiment, she posed a question regarding if there is a difference between those who are used to listen to music during work and those who are not, and this is why we asked about our subject’s habit regarding music listening.
+
+Column
+-------------------------------------
+### Sources {data-width=400}
+
+```{r}
+```
+Lesiuk, T. (2005). The effect of music listening on work performance. Psychology of Music, 33(2), 173-191. https://doi.org/10.1177/0305735605050650
+
+
+Mori, F. & Naghsh, F.A. & Tezuka, Taro. (2014). The effect of music on the level of 
+mental concentration and its temporal change. CSEDU 2014 - Proceedings of the 6th International 
+Conference on Computer Supported Education. 1. 34-42
+
+more to be added :)
