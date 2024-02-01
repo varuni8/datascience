@@ -307,18 +307,13 @@ As for what concerns the more intricate passage, the presence or absence of musi
 
 By foregrounding the easier passage, we obtained more varied results: while we predicted people would spend less time reading when listening to music, we also encountered a meaningful variability for the participants who read it without music, some of whom took longer and some shorter times. Furthermore, subjects who responded negatively to the presence of music scored relatively high regardless, due to the simplicity of the text, although not as high as subjects who responded positively or indifferently. Hence, we can deduce that our hypothesis that music poses a threat to concentration in complex tasks rather than easier ones was fairly precise.
 
-Row
--------------------------------------
-### Limitations
-Since we selected and controlled the music the participants listened to, we cannot infer that other pieces of music will have the same effect on the reading time and accuracy. However, the scope of this research is not to investigate which genre of music is more effective when performing a task involving high level of concentration, but rather whether the absence and presence of music significantly impacts the speed and accuracy of the reception of the information. Therefore, we have focused on more “catchy” and popular songs without delving too deep into a particular music category.
-
 Column
 -------------------------------------
 
-### Box plot representing the time taken to read both passages with and without music{data-width=300}
+### Violin plots representing the time taken to read both passages with and without music{data-width=300}
 
 ```{r}
-include_graphics("C:\\Users\\varun\\Downloads\\boxplots.png") 
+include_graphics("C:\\Users\\varun\\Downloads\\violin diag.png")
 ```
 
 ### Scatterplots representing how the accuracy was affected by music {data-height=800}
@@ -326,14 +321,29 @@ include_graphics("C:\\Users\\varun\\Downloads\\boxplots.png")
 include_graphics("C:\\Users\\varun\\Downloads\\scatterplots.png")
 ```
 
+Row
+-------------------------------------
+### Scatterplots representing how habit and proficiency levels are related {data-height=300}
+```{r}
+include_graphics("C:\\Users\\varun\\Downloads\\habit.png")
+```
+
+### Limitations
+Given our deliberate selection and control of the music participants listened to during the experiment, it's important to note that our findings may not be extrapolated to assert that all other genres of music would yield similar effects on reading time and accuracy. The primary aim of our research is not to discern the effectiveness of specific music genres in tasks requiring a high level of concentration. Instead, our focus lies in investigating whether the mere presence or absence of music significantly influences the speed and accuracy of information reception.
+
+To maintain a broad perspective and steer clear of delving deeply into specific music categories, we opted for a selection of more "catchy" and popular songs. This choice allows us to explore the overarching impact of music presence without getting entangled in the nuances of particular genres.
+
 Background
 =======================================================================
 
 Column
 -------------------------------------
 ### Literature Study
+Our experiment draws inspiration from Teresa Lesiuk's notable study, "The Effect of Music Listening on Work Performance." Lesiuk's investigation involved monitoring the mood, work quality, and time-on-task of 56 IT developers over a five-week period, allowing participants to choose their music during regular work activities.
 
-Our experiment is partially inspired by Teresa Lesiuk’s study: The effect of music listening on work performance. In her experiment, she monitored 56 IT developers’ mood, work quality, time-on-task in a 5 weeks timeframe. The music choice was not limited, and the participants were assigned to conduct their regular tasks for work. By contrast, we controlled for the music our subjects listened to, since our aim was to have our subjects exposed to the same stimuli and it is not possible for Qualtrics to automatically play the type of music they are used to. On the other hand, the demographic for this experiment is more diverse, and the tasks we assign our subjects to do have a clear distinction in terms of complexity, allowing us to discover whether music plays a constant role when dealing with tasks requires different level of concentration. Additionally, as Lesiuk found in her result that not everyone responded positively to music in the beginning of the experiment, she posed a question regarding if there is a difference between those who are used to listen to music during work and those who are not, and this is why we asked about our subject’s habit regarding music listening.
+In contrast, our approach involved a more controlled selection of music for our subjects. The rationale behind this decision was to expose all participants to the same auditory stimuli, given the limitations of Qualtrics in automatically playing individualized music choices. Notably, our experiment features a more diverse demographic, and the tasks assigned to our subjects exhibit clear distinctions in complexity. This deliberate variation allows us to discern whether music consistently influences performance across tasks demanding different levels of concentration.
+
+Furthermore, Lesiuk's findings highlighted individual differences in responses to music at the beginning of her experiment. To delve deeper into this aspect, we sought to investigate whether individuals' habits of listening to music during work play a role in their responsiveness. This consideration prompted us to inquire about our subjects' habits regarding music consumption, providing a nuanced perspective on the potential interplay between music habits and task performance.
 
 Column
 -------------------------------------
