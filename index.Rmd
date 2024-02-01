@@ -94,9 +94,6 @@ Row
 -------------------------------------
 
 ### The survey
-```{r}
-
-```
 The survey begins by collecting fundamental user information, including their age group and employment status. Subsequently, participants encounter the first passage, with the presence or absence of background music randomly assigned. After reading the initial passage under the specified condition, respondents are prompted to answer questions related to that passage.
 
 Following this, participants proceed to the second passage, experiencing the opposite music condition from the first. For instance, if music accompanied the reading of the first passage, the second passage is read without music, and vice versa. Again, participants respond to questions pertaining to the second passage.
@@ -110,7 +107,7 @@ In addition to passage-specific questions, the survey delves into participants' 
   c. the music made it easier to read
   
   
-2. Do you usually listen to music while reading or studying/working?"
+2. Do you usually listen to music while reading or studying/working?
 
   a. Yes
   b. No
@@ -130,14 +127,13 @@ In addition to passage-specific questions, the survey delves into participants' 
   b. Asia
   c. North america
   d. Other
+ 
   
 Column
 -------------------------------------
-
 ```{r}
 include_graphics("C:\\Users\\varun\\Downloads\\survey.png") 
 ```
-
 
 Time with vs without music{data-navmenu="Research" data-orientation=columns} 
 =======================================================================
@@ -150,38 +146,17 @@ Row {.tabset data-height=650}
 data1 <- read.csv('C:\\Users\\varun\\OneDrive\\Documents\\datascience\\DF1.xls')
 data2 <- read.csv('C:\\Users\\varun\\OneDrive\\Documents\\datascience\\DF2.xls')
 
-gt1 <- data1$GlomarTime_Page.Submit
-gmt2 <- data2$GlomarMusicTime_Page.Submit
-
-df1 <- data.frame(
- ReadingPassage = rep(c("- Music", "+ Music"), times = c(length(gt1), length(gmt2))),
- Times = c(gt1, gmt2)
-)
-
-s <- ggplot(df1, aes(x = ReadingPassage, y = Times, fill=ReadingPassage)) + 
-  geom_boxplot(width = 0.5,outlier.shape = NA)+
-  geom_point(position = position_jitter(width = 0.1), size = 1, color = "blue") +
-  stat_summary(fun = mean, geom = "point", shape = 18, size = 3, color = "green")+
-  labs(title = "Glomar Passage") 
-
-t1 <- t.test(gt1, gmt2)
-text1 <- paste("P-Value", round(t1$p.value,digits=3))
-
-s + theme(legend.position = "none") + annotate("text", x = 2.5, y = 500, label = text1, hjust = 1, vjust = 1, size = 4, color = "black")
-```
-
-### Passage 2
-```{r}
 amt1 <- data1$AmazonMusicTime_Page.Submit
 at2 <- data2$AmazonTime_Page.Submit
 
 df2 <- data.frame(
-  ReadingPassage = rep(c("+ Music", "- Music"), times = c(length(amt1), length(at2))),
+  ReadingPassage = rep(c("With music", "Without music"), times = c(length(amt1), length(at2))),
   Times = c(amt1, at2)
 )
 
+
 p <- ggplot(df2, aes(x = ReadingPassage, y = Times, fill=ReadingPassage)) + 
-  geom_boxplot(width = 0.5,outlier.shape = NA)+
+  geom_violin() +
   geom_point(position = position_jitter(width = 0.1), size = 1, color = "blue") +
   stat_summary(fun = mean, geom = "point", shape = 18, size = 3, color = "green") +
   labs(title = "Amazon Passage") 
@@ -193,10 +168,31 @@ p + theme(legend.position = "none") + annotate("text", x = 2.5, y = 300, label =
 
 ```
 
- 
+### Passage 2
+```{r}
+gt1 <- data1$GlomarTime_Page.Submit
+gmt2 <- data2$GlomarMusicTime_Page.Submit
+
+df1 <- data.frame(
+ ReadingPassage = rep(c("Without music", "With music"), times = c(length(gt1), length(gmt2))),
+ Times = c(gt1, gmt2)
+)
+
+s <- ggplot(df1, aes(x = ReadingPassage, y = Times, fill=ReadingPassage)) + 
+  geom_violin()+
+  geom_point(position = position_jitter(width = 0.1), size = 1, color = "blue") +
+  stat_summary(fun = mean, geom = "point", shape = 18, size = 3, color = "green") +
+  labs(title = "Glomar Passage") 
+
+t1 <- t.test(gt1, gmt2)
+text1 <- paste("P-Value", round(t1$p.value,digits=3))
+
+s + theme(legend.position = "none") + annotate("text", x = 2.5, y = 500, label = text1, hjust = 1, vjust = 1, size = 4, color = "black")
+
+```
+
 Column {.sidebar data-width=300}
 -------------------------------------
-
 In examining the impact of background music on reading times for passages of varying difficulty levels, intriguing patterns emerged. For the challenging passage, participants ended up spending less time without music, suggesting a potential efficiency in navigating the complexities of the text. However, when music accompanied the difficult passage, the average reading time saw a notable increase, indicating that the presence of music might pose a challenge or distraction during the comprehension of more intricate content.
 
 Contrastingly, for the easier Amazon passage, the influence of music displayed a nuanced effect on participants' reading times. Interestingly, those reading with music completed the passage in notably less time on average, suggesting a potential positive impact on reading speed. Without music, the reading times exhibited surprising variability; while a substantial portion of participants swiftly completed the passage, there was also a noteworthy group that took unexpectedly longer. This diversity in response times implies that the absence of music led to varied reading speeds, with some individuals benefiting from a quicker pace, while others engaged in a more prolonged reading experience.
@@ -207,11 +203,11 @@ Time vs Accuracy{data-navmenu="Research" data-orientation=columns}
 
 Row {.tabset data-height=650}
 -------------------------------------
-
-### With Music1
+### Passage 1 with Music
 ```{r}
 data1 <- read.csv('C:\\Users\\varun\\OneDrive\\Documents\\datascience\\DF1.xls')
 data2 <- read.csv('C:\\Users\\varun\\OneDrive\\Documents\\datascience\\DF2.xls')
+
 ggplot(data1, aes(AmazonMusicTime_Page.Submit, AMQScore, color= MusicEffectAmazon, size=Proficiency)) +
   geom_point(alpha=0.4, position="jitter") +
   scale_color_manual(values=c('The music made it easier to read'='green',
@@ -222,8 +218,7 @@ ggplot(data1, aes(AmazonMusicTime_Page.Submit, AMQScore, color= MusicEffectAmazo
   labs(title = "Scatter Plot of Reading Time and Correct Answers")
 ```
 
-### With Music2
-
+### Passage 2 with Music
 ```{r}
 ggplot(data2, aes(GlomarMusicTime_Page.Submit, GMQScore, color= MusicEffectGlomar, size=Proficiency)) +
   geom_point(alpha=0.4, position="jitter") +
@@ -238,7 +233,7 @@ ggplot(data2, aes(GlomarMusicTime_Page.Submit, GMQScore, color= MusicEffectGloma
 Row {.tabset data-height=650}
 -------------------------------------
 
-### Without Music1
+### Passage 1 without Music
 ```{r}
 ggplot(data2, aes(AmazonTime_Page.Submit, AQScore, size=Proficiency)) +
   geom_point(alpha=0.4, position="jitter")  +
@@ -247,7 +242,7 @@ ggplot(data2, aes(AmazonTime_Page.Submit, AQScore, size=Proficiency)) +
   labs(title = "Scatter Plot of Reading Time and Correct Answers")
 ```
 
-### Without Music2
+### Passage 2 without Music
 ```{r}
 ggplot(data1, aes(GlomarTime_Page.Submit, GQScore, size=Proficiency)) +
   geom_point(alpha=0.4, position="jitter")  +
@@ -264,13 +259,14 @@ In analyzing the impact of background music on participants' performance across 
 
 Shifting focus to the easy passage, with music, individuals who perceived it as challenging still achieved high scores, likely due to the inherent simplicity of the passage. Similarly, those who perceived no difference in difficulty, even with music, also scored relatively higher. In the absence of music, reading times were shorter compared to the duration with music, and the average number of correct answers was higher, suggesting that the absence of background music positively influenced both reading speed and comprehension for the easy passage.
 
-Accuracy wrt Habit {data-navmenu="Research" data-orientation=columns} 
+Accuracy & Habit {data-navmenu="Research" data-orientation=columns} 
 =======================================================================
 
 Row {.tabset data-height=650}
 -------------------------------------
-```{r}
 
+### Passage 1
+```{r}
 ggplot(data1, aes(AmazonMusicTime_Page.Submit, AMQScore, color= Habit, size=Proficiency)) +
   geom_point(alpha=0.4, position="jitter") +
   scale_color_manual(values=c('Yes'='green', 'No'='red')) +
@@ -279,18 +275,26 @@ ggplot(data1, aes(AmazonMusicTime_Page.Submit, AMQScore, color= Habit, size=Prof
   labs(title = "Scatter Plot of Reading Time and Correct Answers")
 ```
 
+### Passage 2
 ```{r}
-
 ggplot(data2, aes(GlomarMusicTime_Page.Submit, GMQScore, color= Habit, size=Proficiency)) +
   geom_point(alpha=0.4, position="jitter") +
   scale_color_manual(values=c('Yes'='green', 'No'='red')) +
   scale_size_manual(values = c("Elementary proficiency"=1, "Limited working proficiency"=2,
                                "Professional working proficiency" =4,"Full professional proficiency / Native"=6 )) + 
-  labs(title = "Scatter Plot of Reading Time and Correct Answers")
+  labs(title = "Scatter Plot of Reading Time and Correct Answers")
 ```
 
 Column {.sidebar data-width=300}
 -------------------------------------
+In the examination of the correlation between participants' self-reported proficiency levels in English, their habitual engagement with music, and their performance on passages of different difficulty levels, intriguing patterns emerged.
+
+For the initial, relatively straightforward passage, individuals across all proficiency levels, regardless of their customary music-listening practices, demonstrated commendable performance. This suggests that the simplicity of the passage might have mitigated the influence of both language proficiency and music habits.
+
+Conversely, when addressing the more challenging passage, participants who indicated full proficiency exhibited lower scores. Additionally, no clear correlation emerged between self-reported proficiency levels, music-listening habits, and the number of correct answers. This lack of alignment raises queries regarding the intricate factors affecting comprehension and problem-solving skills, particularly when faced with linguistically demanding tasks.
+
+In summary, akin to findings in studies on background music and reading times, our results reveal nuanced dynamics in the interplay of self-perceived proficiency, music-listening behaviors, and task performance, specifically within the realm of language challenges. This underscores the need for further exploration into the multifaceted variables that shape performance across varying linguistic complexities.
+
 
 Conclusion
 =======================================================================
